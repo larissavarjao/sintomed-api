@@ -1,0 +1,1 @@
+# Sintomed API
