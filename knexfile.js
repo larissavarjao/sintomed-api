@@ -30,7 +30,7 @@ module.exports = {
     },
     seeds: { directory: "./data/seeds" },
   },
-  production: {
+  production: process.env.DATABASE_URL || {
     client: "pg",
     connection: {
       user: process.env.POSTGRES_USER,
