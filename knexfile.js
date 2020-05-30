@@ -38,7 +38,7 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "data/migrations",
+      directory: "app/data/migrations",
     },
   },
 };
