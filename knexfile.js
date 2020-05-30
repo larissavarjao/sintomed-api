@@ -12,9 +12,8 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: "data/migrations",
     },
-    seeds: { directory: "./data/seeds" },
   },
   test: {
     client: "pg",
@@ -26,9 +25,8 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: "data/migrations",
     },
-    seeds: { directory: "./data/seeds" },
   },
   production: process.env.DATABASE_URL || {
     client: "pg",
@@ -40,8 +38,7 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: "data/migrations",
     },
-    seeds: { directory: "./data/seeds" },
   },
 };
