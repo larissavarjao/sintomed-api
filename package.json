@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm migrate && babel-node src/index.js",
+    "start": "npm run migrate && babel-node src/index.js",
     "develop": "NODE_ENV=development nodemon --exec babel-node src/index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
