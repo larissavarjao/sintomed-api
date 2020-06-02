@@ -1,40 +1,47 @@
-import * as bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
-import db from '../../data/db';
+import * as bcrypt from "bcryptjs";
+import * as jwt from "jsonwebtoken";
+import db from "../../data/db";
 
 export const get = async (id) => {
-  return db('users').where({ id }).first();
+  return db("users").where({ id }).first();
 };
 
 export const getByEmail = async (email) => {
-  return db('users').where({ email }).first();
+  return db("users").where({ email }).first();
 };
 
-export const insert = async (firstName, lastName, email, password) => {
+export const insert = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  pacientName
+) => {
   const encryptedPassword = await bcrypt.hash(password, await bcrypt.genSalt());
   const newUserCreated = (
-    await db('users')
+    await db("users")
       .insert({
         first_name: firstName,
         last_name: lastName,
         email,
         password: encryptedPassword,
         created_at: new Date(),
+        pacient_name: pacientName,
       })
-      .returning('*')
+      .returning("*")
   )[0];
 
   return newUserCreated;
 };
 
 export const update = async (objToUpdate, id) => {
-  return db('users')
+  return db("users")
     .update({ ...objToUpdate, updated_at: new Date() })
     .where({ id });
 };
 
 export const remove = async (id) => {
-  return db('users').update({ deleted_at: new Date() }).where({ id });
+  return db("users").update({ deleted_at: new Date() }).where({ id });
 };
 
 export const generateAuthToken = (id) => {
