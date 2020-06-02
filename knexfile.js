@@ -1,5 +1,7 @@
 require("dotenv").config();
 const _ = require("lodash");
+const path = require("path");
+const MIGRATION_DIR = path.resolve("data/migrations");
 
 module.exports = {
   development: {
@@ -12,9 +14,8 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: MIGRATION_DIR,
     },
-    seeds: { directory: "./data/seeds" },
   },
   test: {
     client: "pg",
@@ -26,11 +27,10 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: MIGRATION_DIR,
     },
-    seeds: { directory: "./data/seeds" },
   },
-  production: {
+  production: process.env.DATABASE_URL || {
     client: "pg",
     connection: {
       user: process.env.POSTGRES_USER,
@@ -40,8 +40,7 @@ module.exports = {
       password: process.env.POSTGRES_PASS,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: MIGRATION_DIR,
     },
-    seeds: { directory: "./data/seeds" },
   },
 };
