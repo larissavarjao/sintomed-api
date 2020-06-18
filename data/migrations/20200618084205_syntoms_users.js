@@ -4,6 +4,7 @@ exports.up = function (knex) {
     table.text("name").notNullable();
     table.text("description");
     table.text("classification");
+    table.uuid("type_id").notNullable().references("id").inTable("syntoms_types");
     table.uuid("user_id").notNullable().references("id").inTable("users");
     table.datetime("created_at", { precision: 6 }).notNullable().defaultTo(knex.fn.now());
     table.datetime("updated_at", { precision: 6 }).notNullable().defaultTo(knex.fn.now());
