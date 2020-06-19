@@ -9,10 +9,8 @@ export const router = express.Router();
 
 router.post("/users", async (req, res) => {
   const newUser = req.body;
-  console.log("ENTREI", newUser);
 
-  if (!isNewUserValid(newUser))
-    return res.status(400).send({ message: "Email não é válido." });
+  if (!isNewUserValid(newUser)) return res.status(400).send({ message: "Por favor, preencha os dados corretamente." });
 
   const userAlreadyHasEmail = await User.getByEmail(newUser.email);
   if (userAlreadyHasEmail) {
@@ -27,14 +25,11 @@ router.post("/users", async (req, res) => {
       newUser.password,
       newUser.pacientName
     );
-    console.log({ user });
 
     return res.status(201).send(User.format(user));
   } catch (e) {
     console.error(e);
-    return res
-      .status(400)
-      .send({ message: "Ocorreu um erro, tente novamente mais tarde." });
+    return res.status(400).send({ message: "Ocorreu um erro, tente novamente mais tarde." });
   }
 });
 
@@ -42,8 +37,7 @@ router.post("/auth", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  if (!isUserLoginValid(email, password))
-    return res.status(401).send({ error: "Unable to login" });
+  if (!isUserLoginValid(email, password)) return res.status(401).send({ error: "Unable to login" });
 
   try {
     const user = await User.getByEmail(email);
@@ -67,9 +61,7 @@ router.post("/auth", async (req, res) => {
 router.put("/users", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["firstName", "lastName", "email"];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
   if (!isValidOperation) {
     return res.status(400).send({ error: "Invalid operation" });
