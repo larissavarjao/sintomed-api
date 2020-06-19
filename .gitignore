@@ -4,3 +4,4 @@ dist/
 coverage/
 .env
 .env.test
+package-lock.json
