@@ -29,6 +29,7 @@
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
     "pg": "^8.0.2",
+    "uuidv4": "^6.1.0",
     "validator": "^13.0.0"
   },
   "devDependencies": {

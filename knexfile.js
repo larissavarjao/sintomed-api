@@ -2,6 +2,7 @@ require("dotenv").config();
 const _ = require("lodash");
 const path = require("path");
 const MIGRATION_DIR = path.resolve("data/migrations");
+const SEEDS_DIR = path.resolve("data/seeds");
 
 module.exports = {
   development: {
@@ -16,6 +17,9 @@ module.exports = {
     migrations: {
       directory: MIGRATION_DIR,
     },
+    seeds: {
+      directory: SEEDS_DIR,
+    },
   },
   test: {
     client: "pg",
@@ -29,6 +33,9 @@ module.exports = {
     migrations: {
       directory: MIGRATION_DIR,
     },
+    seeds: {
+      directory: SEEDS_DIR,
+    },
   },
   production: process.env.DATABASE_URL || {
     client: "pg",
@@ -41,6 +48,9 @@ module.exports = {
     },
     migrations: {
       directory: MIGRATION_DIR,
+    },
+    seeds: {
+      directory: SEEDS_DIR,
     },
   },
 };
