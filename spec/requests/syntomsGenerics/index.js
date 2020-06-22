@@ -1,10 +1,10 @@
 const request = require("supertest");
 import { app } from "../../../src/index";
 
-export const getAllSyntomsGenerics = () => {
-  return request(app).get("/syntoms-generics").send();
+export const getAllSyntomsGenerics = (token) => {
+  return request(app).get("/syntomsgenerics").set("Authorization", `Bearer ${token}`).send();
 };
 
-export const getSyntomGeneric = (id) => {
-  return request(app).get("/syntoms-generics").send({ id });
+export const getSyntomGeneric = (token, id) => {
+  return request(app).get(`/syntomsgenerics/${id}`).set("Authorization", `Bearer ${token}`).send({ id });
 };
