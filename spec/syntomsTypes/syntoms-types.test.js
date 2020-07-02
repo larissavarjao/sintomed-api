@@ -1,29 +1,24 @@
 import * as SyntomsTypes from "../../src/syntomsTypes/model";
 import { setupDB } from "../fixtures/db";
-import { generateUser } from "../generators/user";
-import { createUser, loginUser } from "../requests/user";
 import { getType, getAllTypes } from "../requests/syntomsType";
 import { types } from "../../data/utils/types";
 
 describe("Syntoms Types test", () => {
-  let userGenerated;
+  let userBody;
   let user;
-  let userToken;
+  let token;
 
   beforeAll(async () => {
-    await setupDB();
+    userBody = await setupDB();
   });
 
   beforeEach(async () => {
-    userGenerated = generateUser();
-    await createUser(userGenerated);
-    const userBody = (await loginUser(userGenerated.email, userGenerated.password)).body;
     user = userBody.user;
-    userToken = userBody.token;
+    token = userBody.token;
   });
 
   test("User should get all types", async () => {
-    const response = await getAllTypes(userToken);
+    const response = await getAllTypes(token);
     expect(response.status).toBe(200);
 
     const allTypes = response.body;
@@ -35,7 +30,7 @@ describe("Syntoms Types test", () => {
   test("User should get one specific type", async () => {
     const allTypes = await SyntomsTypes.getAll();
     const firstType = allTypes[0];
-    const response = await getType(userToken, firstType.id);
+    const response = await getType(token, firstType.id);
     expect(response.status).toBe(200);
 
     const type = response.body;

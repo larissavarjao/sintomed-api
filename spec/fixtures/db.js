@@ -1,29 +1,22 @@
-const knex = require('knex');
-const knexfile = require('../../knexfile');
+const knex = require("knex");
+const knexfile = require("../../knexfile");
+const { generateUser } = require("../generators/user");
+const { createUser, loginUser } = require("../requests/user");
 
-const configOptions = knexfile['test'];
+const configOptions = knexfile["test"];
 
 const db = knex(configOptions);
 
 export const deleteAllUsers = async () => {
-  db('users').truncate();
-};
-
-export const deleteAllTravels = async () => {
-  db('travels').truncate();
-};
-
-export const deleteAllItineraries = async () => {
-  db('itineraries').truncate();
-};
-
-export const deleteAllTours = async () => {
-  db('tours').truncate();
+  db("users").del();
 };
 
 export const setupDB = async () => {
   await deleteAllUsers();
-  await deleteAllTravels();
-  await deleteAllItineraries();
-  await deleteAllTours();
+  const userGenerated = generateUser();
+  await createUser(userGenerated);
+  const userBody = (
+    await loginUser(userGenerated.email, userGenerated.password)
+  ).body;
+  return userBody;
 };
