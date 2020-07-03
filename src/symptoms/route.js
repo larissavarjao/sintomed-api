@@ -1,80 +1,80 @@
 import * as express from "express";
-import * as Syntom from "./model";
+import * as Symptom from "./model";
 import { auth } from "../utils/auth";
 import { getObject } from "../utils/object";
-import { isNewSyntomValid } from "./validators";
+import { isNewSymptomValid } from "./validators";
 
 export const router = express.Router();
 
-router.get("/syntoms", auth, async (req, res) => {
+router.get("/symptoms", auth, async (req, res) => {
   try {
     const user = req.user;
     if (!user) {
       return res.status(401).send();
     }
 
-    const allSyntoms = await Syntom.getAll(user.id);
-    const syntoms = allSyntoms.map(Syntom.format);
-    return res.send(syntoms);
+    const allSymptoms = await Symptom.getAll(user.id);
+    const symptoms = allSymptoms.map(Symptom.format);
+    return res.send(symptoms);
   } catch (e) {
     console.log("Error ", e);
     return res.status(404).send();
   }
 });
 
-router.get("/syntoms/:id", auth, async (req, res) => {
-  const syntomId = req.params.id;
+router.get("/symptoms/:id", auth, async (req, res) => {
+  const symptomId = req.params.id;
   try {
     const user = req.user;
     if (!user) {
       return res.status(401).send();
     }
 
-    const syntom = await Syntom.get(syntomId);
-    return res.send(Syntom.format(syntom));
+    const symptom = await Symptom.get(symptomId);
+    return res.send(Symptom.format(symptom));
   } catch (e) {
     console.log("Error ", e);
     return res.status(404).send();
   }
 });
 
-router.post("/syntoms", auth, async (req, res) => {
-  const newSyntom = req.body;
+router.post("/symptoms", auth, async (req, res) => {
+  const newSymptom = req.body;
   try {
     const user = req.user;
     if (!user) {
       return res.status(401).send();
     }
 
-    if (!isNewSyntomValid(newSyntom)) {
+    if (!isNewSymptomValid(newSymptom)) {
       return res
         .status(400)
         .send({ message: "Por favor, preencha os dados corretamente." });
     }
 
-    const syntom = await Syntom.insert(
-      newSyntom.happenedAt,
-      newSyntom.durationSeconds,
-      newSyntom.observation,
-      newSyntom.userId,
-      newSyntom.syntomGenericId,
-      newSyntom.syntomUserId
+    const symptom = await Symptom.insert(
+      newSymptom.happenedAt,
+      newSymptom.durationSeconds,
+      newSymptom.observation,
+      newSymptom.userId,
+      newSymptom.symptomGenericId,
+      newSymptom.symptomUserId
     );
-    return res.status(201).send(Syntom.format(syntom));
+    return res.status(201).send(Symptom.format(symptom));
   } catch (e) {
     console.log("Error ", e);
     return res.status(404).send();
   }
 });
 
-router.put("/syntoms", auth, async (req, res) => {
+router.put("/symptoms", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "happenedAt",
     "durationSeconds",
     "observation",
-    "syntomGenericId",
-    "syntomUserId",
+    "symptomGenericId",
+    "symptomUserId",
   ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
@@ -90,25 +90,25 @@ router.put("/syntoms", auth, async (req, res) => {
       return res.status(401).send();
     }
 
-    const oldSyntom = req.body;
-    const updatesToDb = getObject(updates, oldSyntom);
-    const updatedSyntom = await Syntom.update(updatesToDb, oldSyntom.id);
-    res.send(Syntom.format(updatedSyntom));
+    const oldSymptom = req.body;
+    const updatesToDb = getObject(updates, oldSymptom);
+    const updatedSymptom = await Symptom.update(updatesToDb, oldSymptom.id);
+    res.send(Symptom.format(updatedSymptom));
   } catch (e) {
     console.log("Error ", e);
     return res.status(404).send();
   }
 });
 
-router.delete("/syntoms", auth, async (req, res) => {
+router.delete("/symptoms", auth, async (req, res) => {
   try {
     const user = req.user;
     if (!user) {
       return res.status(401).send();
     }
 
-    const syntomDeleted = await Syntom.remove(req.body.id);
-    return res.send(Syntom.format(syntomDeleted));
+    const symptomDeleted = await Symptom.remove(req.body.id);
+    return res.send(Symptom.format(symptomDeleted));
   } catch (e) {
     console.log("Error ", e);
     return res.status(404).send();

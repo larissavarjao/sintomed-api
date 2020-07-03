@@ -1,37 +1,37 @@
 const request = require("supertest");
 import { app } from "../../../src/index";
 
-export const getAllSyntoms = (token) => {
+export const getAllSymptoms = (token) => {
   return request(app)
-    .get("/syntoms")
+    .get("/symptoms")
     .set("Authorization", `Bearer ${token}`)
     .send();
 };
 
-export const getSyntom = (id, token) => {
+export const getSymptom = (id, token) => {
   return request(app)
-    .get(`/syntoms/${id}`)
+    .get(`/symptoms/${id}`)
     .set("Authorization", `Bearer ${token}`)
     .send({ id });
 };
 
-export const createSyntom = (newSyntom, token) => {
+export const createSymptom = (newSymptom, token) => {
   return request(app)
-    .post("/syntoms")
+    .post("/symptoms")
     .set("Authorization", `Bearer ${token}`)
-    .send(newSyntom);
+    .send(newSymptom);
 };
 
-export const updateSyntom = (updateSyntom, token) => {
+export const updateSymptom = (updateSymptom, token) => {
   return request(app)
-    .put("/syntoms")
+    .put("/symptoms")
     .set("Authorization", `Bearer ${token}`)
-    .send(updateSyntom);
+    .send(updateSymptom);
 };
 
-export const deleteSyntom = (id, token) => {
+export const deleteSymptom = (id, token) => {
   return request(app)
-    .delete("/syntoms")
+    .delete("/symptoms")
     .set("Authorization", `Bearer ${token}`)
     .send({ id });
 };

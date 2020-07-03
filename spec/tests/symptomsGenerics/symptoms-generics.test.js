@@ -1,14 +1,12 @@
-import * as SyntomsGenerics from "../../../src/syntomsGenerics/model";
+import * as SymptomsGenerics from "../../../src/symptomsGenerics/model";
 import { setupDB } from "../../fixtures/db";
-import { generateUser } from "../../generators/user";
-import { createUser, loginUser } from "../../requests/user";
 import {
-  getSyntomGeneric,
-  getAllSyntomsGenerics,
-} from "../../requests/syntomsGenerics";
-import { genericSyntoms } from "../../../data/utils/syntoms_generics";
+  getSymptomGeneric,
+  getAllSymptomGenerics,
+} from "../../requests/symptomsGenerics";
+import { genericSymptoms } from "../../../data/utils/symptoms_generics";
 
-describe("Syntoms Generics Test", () => {
+describe("Symptoms Generics Test", () => {
   let userBody;
   let user;
   let token;
@@ -23,22 +21,22 @@ describe("Syntoms Generics Test", () => {
   });
 
   test("User should get all generics", async () => {
-    const response = await getAllSyntomsGenerics(token);
+    const response = await getAllSymptomGenerics(token);
     expect(response.status).toBe(200);
 
-    const allSyntomsGenerics = response.body;
-    const dbGenericsNames = allSyntomsGenerics.map((type) => type.name);
-    const allGenericsNames = genericSyntoms.map((type) => type.name);
-    const dbGenericsDescriptions = allSyntomsGenerics.map(
+    const allSymptomsGenerics = response.body;
+    const dbGenericsNames = allSymptomsGenerics.map((type) => type.name);
+    const allGenericsNames = genericSymptoms.map((type) => type.name);
+    const dbGenericsDescriptions = allSymptomsGenerics.map(
       (type) => type.description
     );
-    const allGenericsDescriptions = genericSyntoms.map(
+    const allGenericsDescriptions = genericSymptoms.map(
       (type) => type.description
     );
-    const dbGenericsClassifications = allSyntomsGenerics.map(
+    const dbGenericsClassifications = allSymptomsGenerics.map(
       (type) => type.classification
     );
-    const allGenericsClassifications = genericSyntoms.map(
+    const allGenericsClassifications = genericSymptoms.map(
       (type) => type.classification
     );
     expect(dbGenericsNames).toMatchObject(allGenericsNames);
@@ -47,9 +45,9 @@ describe("Syntoms Generics Test", () => {
   });
 
   test("User should get one specific generic", async () => {
-    const allGenericSyntoms = await SyntomsGenerics.getAll();
-    const firstGeneric = allGenericSyntoms[0];
-    const response = await getSyntomGeneric(token, firstGeneric.id);
+    const allGenericSymptoms = await SymptomsGenerics.getAll();
+    const firstGeneric = allGenericSymptoms[0];
+    const response = await getSymptomGeneric(token, firstGeneric.id);
     expect(response.status).toBe(200);
 
     const generic = response.body;

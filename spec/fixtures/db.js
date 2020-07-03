@@ -11,13 +11,13 @@ export const deleteAllUsers = async () => {
   db("users").del();
 };
 
-export const deleteAllSyntoms = async () => {
-  db("syntoms").del();
+export const deleteAllSymptoms = async () => {
+  db("symptoms").del();
 };
 
 export const setupDB = async () => {
   await deleteAllUsers();
-  await deleteAllSyntoms();
+  await deleteAllSymptoms();
   const userGenerated = generateUser();
   await createUser(userGenerated);
   const userBody = (

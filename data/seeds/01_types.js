@@ -1,9 +1,9 @@
 const { types } = require("../utils/types");
 
 exports.seed = function (knex) {
-  return knex("syntoms_types")
+  return knex("symptoms_types")
     .del()
     .then(function () {
-      return knex("syntoms_types").insert(types);
+      return knex("symptoms_types").insert(types);
     });
 };

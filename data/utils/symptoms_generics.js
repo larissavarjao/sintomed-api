@@ -9,7 +9,7 @@ const {
   urologicalType,
 } = require("./types");
 
-const genericSyntoms = [
+const genericSymptoms = [
   {
     name: "Caquexia",
     description:
@@ -54,7 +54,8 @@ const genericSyntoms = [
   },
   {
     name: "Fraqueza muscular",
-    description: "Fraqueza muscular ou miastenia é uma perda de força muscular.",
+    description:
+      "Fraqueza muscular ou miastenia é uma perda de força muscular.",
     classification: "M62.8",
     type_id: genericType.id,
   },
@@ -80,13 +81,15 @@ const genericSyntoms = [
   },
   {
     name: "Dor abdominal",
-    description: "Dor abdominal pode ser um sintoma associado a distúrbios transitórios ou a doenças mais graves.",
+    description:
+      "Dor abdominal pode ser um sintoma associado a distúrbios transitórios ou a doenças mais graves.",
     classification: "R10",
     type_id: genericType.id,
   },
   {
     name: "Dor torácica",
-    description: "Dor torácica é a sensação de dor ou desconforto , localizada na região anterior do tórax.",
+    description:
+      "Dor torácica é a sensação de dor ou desconforto , localizada na região anterior do tórax.",
     classification: "R07",
     type_id: genericType.id,
   },
@@ -163,5 +166,5 @@ const genericSyntoms = [
 ];
 
 module.exports = {
-  genericSyntoms,
+  genericSymptoms,
 };

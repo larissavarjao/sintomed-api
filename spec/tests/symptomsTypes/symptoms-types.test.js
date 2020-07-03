@@ -1,9 +1,9 @@
-import * as SyntomsTypes from "../../../src/syntomsTypes/model";
+import * as SymptomsTypes from "../../../src/symptomsTypes/model";
 import { setupDB } from "../../fixtures/db";
-import { getType, getAllTypes } from "../../requests/syntomsType";
+import { getType, getAllTypes } from "../../requests/symptomsType";
 import { types } from "../../../data/utils/types";
 
-describe("Syntoms Types test", () => {
+describe("Symptoms Types test", () => {
   let userBody;
   let user;
   let token;
@@ -28,7 +28,7 @@ describe("Syntoms Types test", () => {
   });
 
   test("User should get one specific type", async () => {
-    const allTypes = await SyntomsTypes.getAll();
+    const allTypes = await SymptomsTypes.getAll();
     const firstType = allTypes[0];
     const response = await getType(token, firstType.id);
     expect(response.status).toBe(200);
