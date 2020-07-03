@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _ = require("lodash");
 
 export const getObject = (updates, body) => {
   let updatesToDb = {};
@@ -11,4 +11,14 @@ export const getObject = (updates, body) => {
   });
 
   return updatesToDb;
+};
+
+export const transformToSnakeCase = (obj) => {
+  const newObj = {};
+
+  for (let key in obj) {
+    newObj[_.snakeCase(key)] = obj[key];
+  }
+
+  return newObj;
 };

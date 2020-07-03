@@ -16,7 +16,7 @@ exports.up = function (knex) {
       .uuid("symptom_generic_id")
       .references("id")
       .inTable("symptoms_generics");
-    table.uuid("symptom_users_id").references("id").inTable("symptoms_users");
+    table.uuid("symptom_user_id").references("id").inTable("symptoms_users");
     table
       .datetime("created_at", { precision: 6 })
       .notNullable()

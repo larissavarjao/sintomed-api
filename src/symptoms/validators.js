@@ -1,6 +1,6 @@
 import { haveUserWithId } from "../utils/user";
 
-export const isNewSymptomValid = (newSymptom) => {
+export const isSymptomValid = (newSymptom) => {
   if (!newSymptom.happenedAt) {
     return false;
   }
@@ -10,6 +10,18 @@ export const isNewSymptomValid = (newSymptom) => {
   }
 
   if (!newSymptom.symptomGenericId && !newSymptom.symptomUserId) {
+    return false;
+  }
+
+  return true;
+};
+
+export const isSymptomValidToUpdate = (symptom) => {
+  if (symptom.happenedAt && symptom.happenedAt === null) {
+    return false;
+  }
+
+  if (symptom.symptomGenericId === null && symptom.symptomUserId === null) {
     return false;
   }
 

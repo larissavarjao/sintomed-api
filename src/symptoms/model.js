@@ -52,7 +52,7 @@ export const getAllSymptomsUser = async (userId) => {
     .from("symptoms")
     .rightJoin(
       "symptoms_users",
-      "symptoms.symptom_users_id",
+      "symptoms.symptom_user_id",
       "symptoms_users.id"
     )
     .rightJoin("symptoms_types", "symptoms_users.type_id", "symptoms_types.id")
@@ -63,23 +63,11 @@ export const getAllSymptomsUser = async (userId) => {
     });
 };
 
-export const insert = async (
-  happenedAt,
-  duration,
-  observation,
-  userId,
-  symptomGenericId,
-  symptomUserId
-) => {
+export const insert = async (newSymptom) => {
   const newSymptomCreated = (
     await db("symptoms")
       .insert({
-        happened_at: happenedAt,
-        duration_seconds: duration,
-        observation,
-        user_id: userId,
-        symptom_generic_id: symptomGenericId,
-        symptom_users_id: symptomUserId,
+        ...newSymptom,
         created_at: new Date(),
         updated_at: new Date(),
       })
@@ -90,9 +78,14 @@ export const insert = async (
 };
 
 export const update = async (objToUpdate, id) => {
-  return db("symptoms")
-    .update({ ...objToUpdate, updated_at: new Date() })
-    .where({ id });
+  const updatedSymptom = (
+    await db("symptoms")
+      .where({ id })
+      .update({ ...objToUpdate, updated_at: new Date() })
+      .returning("*")
+  )[0];
+
+  return updatedSymptom;
 };
 
 export const remove = async (id) => {

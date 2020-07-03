@@ -1,8 +1,8 @@
 import * as express from "express";
 import * as Symptom from "./model";
 import { auth } from "../utils/auth";
-import { getObject } from "../utils/object";
-import { isNewSymptomValid } from "./validators";
+import { transformToSnakeCase } from "../utils/object";
+import { isSymptomValid, isSymptomValidToUpdate } from "./validators";
 
 export const router = express.Router();
 
@@ -46,20 +46,14 @@ router.post("/symptoms", auth, async (req, res) => {
       return res.status(401).send();
     }
 
-    if (!isNewSymptomValid(newSymptom)) {
+    if (!isSymptomValid(newSymptom)) {
       return res
         .status(400)
         .send({ message: "Por favor, preencha os dados corretamente." });
     }
 
-    const symptom = await Symptom.insert(
-      newSymptom.happenedAt,
-      newSymptom.durationSeconds,
-      newSymptom.observation,
-      newSymptom.userId,
-      newSymptom.symptomGenericId,
-      newSymptom.symptomUserId
-    );
+    const symptomSnakeCase = transformToSnakeCase(newSymptom);
+    const symptom = await Symptom.insert(symptomSnakeCase);
     return res.status(201).send(Symptom.format(symptom));
   } catch (e) {
     console.log("Error ", e);
@@ -68,21 +62,18 @@ router.post("/symptoms", auth, async (req, res) => {
 });
 
 router.put("/symptoms", auth, async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = [
-    "happenedAt",
-    "durationSeconds",
-    "observation",
-    "symptomGenericId",
-    "symptomUserId",
-  ];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
+  const id = req.body.id;
+  const updateSymptom = req.body;
 
-  if (!isValidOperation) {
-    return res.status(400).send({ error: "Invalid operation" });
+  if (!isSymptomValidToUpdate(updateSymptom)) {
+    return res
+      .status(400)
+      .send({ message: "Por favor, preencha os dados corretamente." });
   }
+
+  delete updateSymptom.id;
+  delete updateSymptom.userId;
+  delete updateSymptom.createdAt;
 
   try {
     const user = req.user;
@@ -90,9 +81,9 @@ router.put("/symptoms", auth, async (req, res) => {
       return res.status(401).send();
     }
 
-    const oldSymptom = req.body;
-    const updatesToDb = getObject(updates, oldSymptom);
-    const updatedSymptom = await Symptom.update(updatesToDb, oldSymptom.id);
+    const objToUpdate = transformToSnakeCase(updateSymptom);
+
+    const updatedSymptom = await Symptom.update(objToUpdate, id);
     res.send(Symptom.format(updatedSymptom));
   } catch (e) {
     console.log("Error ", e);
