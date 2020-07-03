@@ -9,6 +9,9 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
+    "migrate:test": "knex migrate:latest --env test",
+    "rollback:test": "knex migrate:rollback --env test",
+    "seed:test": "knex seed:run --env test",
     "test": "NODE_ENV=test jest --watch"
   },
   "author": "Larissa Varjão",

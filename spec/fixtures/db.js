@@ -11,8 +11,13 @@ export const deleteAllUsers = async () => {
   db("users").del();
 };
 
+export const deleteAllSyntoms = async () => {
+  db("syntoms").del();
+};
+
 export const setupDB = async () => {
   await deleteAllUsers();
+  await deleteAllSyntoms();
   const userGenerated = generateUser();
   await createUser(userGenerated);
   const userBody = (
