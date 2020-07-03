@@ -89,7 +89,12 @@ export const update = async (objToUpdate, id) => {
 };
 
 export const remove = async (id) => {
-  return db("symptoms").update({ deleted_at: new Date() }).where({ id });
+  return (
+    await db("symptoms")
+      .update({ deleted_at: new Date() })
+      .where({ id })
+      .returning("*")
+  )[0];
 };
 
 export const format = (symptom) => {
@@ -101,6 +106,7 @@ export const format = (symptom) => {
     userId: symptom.user_id,
     createdAt: symptom.created_at,
     updatedAt: symptom.updated_at,
+    deletedAt: symptom.deleted_at,
     // generic or user
     symptomGenericId: !!symptom.symptom_generic_id
       ? symptom.symptom_generic_id

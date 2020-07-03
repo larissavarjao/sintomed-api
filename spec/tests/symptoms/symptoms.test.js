@@ -143,5 +143,22 @@ describe("Symptoms test", () => {
     expect(new Date(updatedSymptom.happenedAt).getFullYear()).toBe(
       getUTCDate(newDate).getFullYear()
     );
+    expect(new Date(updatedSymptom.happenedAt).getMonth()).toBe(
+      getUTCDate(newDate).getMonth()
+    );
+    expect(new Date(updatedSymptom.happenedAt).getDate()).toBe(
+      getUTCDate(newDate).getDate()
+    );
+  });
+
+  test("should delete only symptom", async () => {
+    const genericSymptom = await SymptomGeneric.getAll();
+    const newSymptom = generateSymptom(user.id, genericSymptom[0].id, null);
+    const createdSymptom = (await createSymptom(newSymptom, token)).body;
+    const response = await deleteSymptom(createdSymptom.id, token);
+    const deletedSymptom = response.body;
+
+    expect(response.status).toBe(200);
+    expect(deletedSymptom.deletedAt).not.toBeNull();
   });
 });
