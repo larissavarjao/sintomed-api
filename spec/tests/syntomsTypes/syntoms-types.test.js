@@ -1,7 +1,7 @@
-import * as SyntomsTypes from "../../src/syntomsTypes/model";
-import { setupDB } from "../fixtures/db";
-import { getType, getAllTypes } from "../requests/syntomsType";
-import { types } from "../../data/utils/types";
+import * as SyntomsTypes from "../../../src/syntomsTypes/model";
+import { setupDB } from "../../fixtures/db";
+import { getType, getAllTypes } from "../../requests/syntomsType";
+import { types } from "../../../data/utils/types";
 
 describe("Syntoms Types test", () => {
   let userBody;

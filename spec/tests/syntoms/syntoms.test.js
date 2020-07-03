@@ -1,15 +1,15 @@
-import * as Syntom from "../../src/syntoms/model";
-import * as SyntomGeneric from "../../src/syntomsGenerics/model";
-import { setupDB } from "../fixtures/db";
+import * as Syntom from "../../../src/syntoms/model";
+import * as SyntomGeneric from "../../../src/syntomsGenerics/model";
+import { setupDB } from "../../fixtures/db";
 import {
   createSyntom,
   deleteSyntom,
   getAllSyntoms,
   getSyntom,
   updateSyntom,
-} from "../requests/syntoms";
-import { generateSyntom } from "../generators/syntom";
-import { getTimeDate } from "../utils/date";
+} from "../../requests/syntoms";
+import { generateSyntom } from "../../generators/syntom";
+import { getTimeDate } from "../../utils/date";
 
 describe("Syntoms test", () => {
   let userBody;

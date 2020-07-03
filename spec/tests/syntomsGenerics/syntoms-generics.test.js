@@ -1,12 +1,12 @@
-import * as SyntomsGenerics from "../../src/syntomsGenerics/model";
-import { setupDB } from "../fixtures/db";
-import { generateUser } from "../generators/user";
-import { createUser, loginUser } from "../requests/user";
+import * as SyntomsGenerics from "../../../src/syntomsGenerics/model";
+import { setupDB } from "../../fixtures/db";
+import { generateUser } from "../../generators/user";
+import { createUser, loginUser } from "../../requests/user";
 import {
   getSyntomGeneric,
   getAllSyntomsGenerics,
-} from "../requests/syntomsGenerics";
-import { genericSyntoms } from "../../data/utils/syntoms_generics";
+} from "../../requests/syntomsGenerics";
+import { genericSyntoms } from "../../../data/utils/syntoms_generics";
 
 describe("Syntoms Generics Test", () => {
   let userBody;

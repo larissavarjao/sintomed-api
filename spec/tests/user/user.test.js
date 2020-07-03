@@ -1,13 +1,13 @@
-import * as User from "../../src/user/model";
+import * as User from "../../../src/user/model";
 import * as faker from "faker";
-import { setupDB } from "../fixtures/db";
-import { generateUser } from "../generators/user";
+import { setupDB } from "../../fixtures/db";
+import { generateUser } from "../../generators/user";
 import {
   createUser,
   loginUser,
   deleteUser,
   updateUser,
-} from "../requests/user";
+} from "../../requests/user";
 
 describe("User test - create", () => {
   let newUser;
