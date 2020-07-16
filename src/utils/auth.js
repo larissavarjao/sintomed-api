@@ -1,12 +1,12 @@
-import * as jwt from 'jsonwebtoken';
-import * as User from '../user/model';
+import * as jwt from "jsonwebtoken";
+import * as User from "../user/model";
 
 export const auth = async (req, res, next) => {
   try {
-    const token = req.header('Authorization').replace('Bearer ', '');
+    const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET || 'HeRmiONeGrangErBeTTerTHENHaRRyPoTteR'
+      process.env.JWT_SECRET || "HeRmiONeGrangErBeTTerTHENHaRRyPoTteR"
     );
     const user = await User.get(decoded.id);
 
@@ -17,6 +17,6 @@ export const auth = async (req, res, next) => {
     next();
   } catch (e) {
     console.log(e);
-    res.status(401).send({ error: 'Please authenticate!' });
+    res.status(401).send({ error: "Please authenticate!" });
   }
 };

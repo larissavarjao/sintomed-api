@@ -116,7 +116,7 @@ export const format = (symptom) => {
     description: symptom.description,
     classification: symptom.classification,
     // type
-    type_id: symptom.type_id,
-    type_name: symptom.type_name,
+    typeId: symptom.type_id,
+    typeName: symptom.type_name,
   };
 };

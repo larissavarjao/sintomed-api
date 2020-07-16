@@ -13,8 +13,7 @@ router.get("/symptoms", auth, async (req, res) => {
       return res.status(401).send();
     }
 
-    const allSymptoms = await Symptom.getAll(user.id);
-    const symptoms = allSymptoms.map(Symptom.format);
+    const symptoms = await Symptom.getAll(user.id);
     return res.send(symptoms);
   } catch (e) {
     console.log("Error ", e);
