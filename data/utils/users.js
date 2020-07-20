@@ -7,7 +7,7 @@ const larissaFakeUser = {
   last_name: "Varjão",
   pacient_name: "Zelia",
   email: "larissa@gmail.com",
-  password: bcryptPassword("12345678"),
+  password: await bcryptPassword("12345678"),
 };
 
 const users = [larissaFakeUser];
