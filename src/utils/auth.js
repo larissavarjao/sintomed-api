@@ -1,4 +1,5 @@
 import * as jwt from "jsonwebtoken";
+import * as bcrypt from "bcryptjs";
 import * as User from "../user/model";
 
 export const auth = async (req, res, next) => {
@@ -20,3 +21,6 @@ export const auth = async (req, res, next) => {
     res.status(401).send({ error: "Please authenticate!" });
   }
 };
+
+export const bcryptPassword = async (password) =>
+  await bcrypt.hash(password, await bcrypt.genSalt());

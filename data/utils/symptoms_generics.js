@@ -1,3 +1,4 @@
+const { uuid } = require("uuidv4");
 const {
   cardiovascularType,
   genericType,
@@ -11,6 +12,7 @@ const {
 
 const genericSymptoms = [
   {
+    id: uuid(),
     name: "Caquexia",
     description:
       "é uma síndrome complexa e multifatorial que se caracteriza pela perda de peso, atrofia muscular, fadiga, fraqueza e significante perda de apetite em pessoas que não estão ativamente tentando perder peso.",
@@ -167,6 +169,7 @@ const genericSymptoms = [
 
 const neurologicalSymptoms = [
   {
+    id: uuid(),
     name: "Ansiedade",
     description:
       "A ansiedade é uma emoção caracterizada por um estado desagradável de agitação interior, muitas vezes acompanhada de comportamento nervoso, como o de se embalar de trás para a frente.",
@@ -212,6 +215,7 @@ const neurologicalSymptoms = [
 
 const ophthalmologicalSymptoms = [
   {
+    id: uuid(),
     name: "Visão embaçada",
     description:
       "A visão turva pode não ser causadas por doenças subjacentes. Algumas causas comuns incluem esfregar os olhos, secura nos olhos, choro, envelhecimento ou óculos de grau inadequado.",
@@ -250,6 +254,7 @@ const ophthalmologicalSymptoms = [
 
 const gastrointestinalSymptoms = [
   {
+    id: uuid(),
     name: "Anorexia",
     description:
       "Anorexia é a perda ou ausência de apetite também usada como sinônimo de hiporexia villa, diminuição do apetite. Não deve ser confundida com anorexia nervosa, que é um transtorno alimentar em que ocorre recusa constante de alimentos mesmo quando se sente fome.",
@@ -337,6 +342,7 @@ const gastrointestinalSymptoms = [
 
 const cardiovascularSymptoms = [
   {
+    id: uuid(),
     name: "Dor no peito",
     description:
       "Desconforto no peito, incluindo uma dor incômoda, sensação de esmagamento ou ardor, dor lancinante e dor que se irradia para o pescoço ou ombro.",
@@ -396,6 +402,7 @@ const cardiovascularSymptoms = [
 
 const urologicalSymptoms = [
   {
+    id: uuid(),
     name: "Disúria",
     description:
       "Disúria refere-se à dificuldade para urinar. As causas podem ser obstrutivas ou inflamatórias com acometimento do trato urinário inferior. Disúria pode estar associada à algúria, que é a sensação dolorosa causada pelo ato de urinar.",
@@ -434,6 +441,7 @@ const urologicalSymptoms = [
 
 const integumentarySymptoms = [
   {
+    id: uuid(),
     name: "Hipoventilação",
     description:
       "Na medicina, hipoventilação ocorre quando a ventilação é inadequada para realizar a troca de gases nos pulmões.",
@@ -507,6 +515,7 @@ const integumentarySymptoms = [
 
 const pulmonarySymptoms = [
   {
+    id: uuid(),
     name: "Brotoeja",
     description:
       "Brotoeja é o nome popular da miliária, uma dermatite inflamatória causada pela obstrução mecânica à eliminação do suor pelas glândulas sudoríparas (écrinas) e que acaba impedindo a saída do suor do corpo.",

@@ -36,7 +36,8 @@ export const getAllSymptomsGenerics = async (userId) => {
       "symptoms.user_id": userId,
       "symptoms.deleted_at": null,
       "symptoms_generics.deleted_at": null,
-    });
+    })
+    .orderBy("symptoms.happened_at", "asc");
 };
 export const getAllSymptomsUser = async (userId) => {
   return db("symptoms")
